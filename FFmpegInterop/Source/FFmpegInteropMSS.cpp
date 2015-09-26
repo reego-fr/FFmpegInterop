@@ -431,7 +431,7 @@ void FFmpegInteropMSS::OnStarting(MediaStreamSource ^sender, MediaStreamSourceSt
 		if (streamIndex >= 0)
 		{
 			// Convert TimeSpan unit to AV_TIME_BASE
-			int64_t seekTarget = static_cast<int64_t>((request->StartPosition->Value.Duration + mediaStartTime.Duration) / (av_q2d(avFormatCtx->streams[streamIndex]->time_base) * 10000000));
+			int64_t seekTarget = static_cast<int64_t>(request->StartPosition->Value.Duration > 0 ? (request->StartPosition->Value.Duration + mediaStartTime.Duration) / (av_q2d(avFormatCtx->streams[streamIndex]->time_base) * 10000000) : 0);
 
 			if (av_seek_frame(avFormatCtx, streamIndex, seekTarget, 0) < 0)
 			{
