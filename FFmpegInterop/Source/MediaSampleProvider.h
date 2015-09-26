@@ -36,7 +36,7 @@ namespace FFmpegInterop
 	{
 	public:
 		virtual ~MediaSampleProvider();
-		virtual MediaStreamSample^ GetNextSample();
+		virtual MediaStreamSample^ GetNextSample(LONGLONG timestampOffset);
 		virtual void Flush();
 		virtual void SetCurrentStreamIndex(int streamIndex);
 
